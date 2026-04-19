@@ -1,15 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "ChatGPT Math Dir Resolver",
+  "name": "Ai Chatbot Dir Resolver",
   "version": "1.0",
-  "description": "Sets dir=ltr for KaTeX HTML elements on ChatGPT",
+  "description": "Sets correct direction for persian/arabic language on ai chatbots",
   "author": "Milad Niroee",
   "homepage_url": "https://github.com/miladniroee/chatgpt-math-dir-resolver",
   "browser_specific_settings": {
     "gecko": {
       "id": "mniroee@gmail.com",
       "data_collection_permissions": {
-        "data_collection": false
+        "required": ["none"],
+        "optional": []
       }
     }
   },
@@ -19,10 +20,19 @@
     "48": "icons/48px-ChatGPT-Logo.png",
     "128": "icons/128px-ChatGPT-Logo.png"
   },
+  "action": {
+    "default_title": "Ai Chatbot Dir Resolver",
+    "default_popup": "index.html"
+  },
   "content_scripts": [
     {
       "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
-      "js": ["content.js"],
+      "js": ["chatgpt.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://chat.deepseek.com/*"],
+      "js": ["deepseek.js"],
       "run_at": "document_end"
     }
   ]
