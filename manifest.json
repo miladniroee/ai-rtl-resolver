@@ -20,10 +20,6 @@
     "48": "icons/48px-ChatGPT-Logo.png",
     "128": "icons/128px-ChatGPT-Logo.png"
   },
-  "action": {
-    "default_title": "Ai Chatbot Dir Resolver",
-    "default_popup": "index.html"
-  },
   "content_scripts": [
     {
       "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
