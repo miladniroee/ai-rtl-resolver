@@ -1,35 +1,49 @@
 function fixDirection() {
-  const katexElements = document.querySelectorAll('.katex-html');
-  const paraghraphs = document.querySelectorAll('.ds-markdown-paragraph, h2, h3, .ds-message>div:not(.ds-markdown), ul, ol, table');
+  const ignoreElements  = document.querySelectorAll('.katex-html,.md-code-block,code,.ds-virtual-list-items>div>div');
+  const paraghraphs = document.querySelectorAll('.ds-markdown-paragraph, h2, h3, h4, .ds-message>div:not(.ds-markdown), ul, ol, table');
+  const vazirFont = document.querySelectorAll('.ds-virtual-list-items>div>div');
 
-  paraghraphs.forEach(p => {
-    p.setAttribute('dir', detectParagraphDirection(p.textContent));
+  paraghraphs.forEach(el => {
+    el.setAttribute('dir', detectParagraphDirection(el.textContent));
   });
 
-  katexElements.forEach(el => {
+  ignoreElements.forEach(el => {
     el.setAttribute('dir', 'ltr');
+  });
+
+  vazirFont.forEach(el => {
+    el.classList.add('vazir');
   });
 }
 
+
 function detectParagraphDirection(text) {
-    
     text = text.trim();
     
     if (text.length === 0) return 'ltr';
     
-    // finding first character
-    for (let i = 0; i < text.length; i++) {
-        const char = text[i];
+    // استفاده از Intl.Segmenter برای شکستن متن به بخش‌های دیداری (گرافِم‌ها)
+    const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' });
+    const segments = [...segmenter.segment(text)];
+    
+    for (const segment of segments) {
+        const char = segment.segment;
         
-        // if it's numeral or symbol, bypass
+        
+        const isEmojiLike = /[\p{Emoji}\p{Emoji_Presentation}]/u.test(char);
+        if (isEmojiLike) continue;
+        
+      
         if (char.match(/[\d\s\u200E\u200F\u200B#@$%^&*()\-+=_{}[\]\\|:;"'<>,.?/~`!]/)) continue;
         
+      
         const persianRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
         return persianRegex.test(char) ? 'rtl' : 'ltr';
     }
     
     return 'ltr';
 }
+
 
 fixDirection();
 

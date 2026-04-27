@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Ai Chatbot Dir Resolver",
-  "version": "1.0",
+  "version": "2.0",
   "description": "Sets correct direction for persian/arabic language on ai chatbots",
   "author": "Milad Niroee",
   "homepage_url": "https://github.com/miladniroee/chatgpt-math-dir-resolver",
@@ -14,6 +14,12 @@
       }
     }
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["fonts/*"],
+      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*","https://chat.deepseek.com/*"]
+    }
+  ],
   "icons": {
     "16": "icons/16px-ChatGPT-Logo.png",
     "32": "icons/32px-ChatGPT-Logo.png",
@@ -23,12 +29,12 @@
   "content_scripts": [
     {
       "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
-      "js": ["chatgpt.js"],
+      "js": ["loadFonts.js", "chatgpt.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["https://chat.deepseek.com/*"],
-      "js": ["deepseek.js"],
+      "js": ["loadFonts.js", "deepseek.js"],
       "run_at": "document_end"
     }
   ]
