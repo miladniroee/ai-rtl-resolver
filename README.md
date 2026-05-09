@@ -42,7 +42,6 @@ Download zip and use `load unpacked`  option on browser.
 ## Font
 Vazirmatn By Rastikerdar - [https://github.com/rastikerdar/vazirmatn](https://github.com/rastikerdar/vazirmatn)
 
-
 ## Usage
 
 Once installed, the extension automatically works on ChatGPT and Deepseek. All mathematical formulas will display with left-to-right direction.
