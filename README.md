@@ -41,8 +41,6 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 
 ### Firefox
 
-> Firefox version is not available on AMO. Use the manual method below.
-
 1. Install from Firefox Add-ons: [AI RTL Resolver](https://addons.mozilla.org/en-US/firefox/addon/ai-rtl-resolver/?utm_source=chatgpt.com)
 2. Click **Add to Firefox**
 3. Open ChatGPT or DeepSeek
