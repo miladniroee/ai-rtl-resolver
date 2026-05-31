@@ -17,9 +17,15 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 23
 
-      - run: npm install
+      - run: node -v
+      - run: npm -v
+
+      - run: npm cache clean --force
+
+      - run: npm install --verbose
+
       - run: npm run build
 
       - run: |
