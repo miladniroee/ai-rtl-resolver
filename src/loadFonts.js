@@ -18,7 +18,7 @@ style.textContent = `
         font-display: swap;
     }
 
-    .rtl, [dir="rtl"],.vazir {
+    .rtl, [dir="rtl"],.vazir, p, span {
         font-family: 'Vazirmatn', 'Arial', 'Segoe UI', sans-serif !important;
     }
 `;
