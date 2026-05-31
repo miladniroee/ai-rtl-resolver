@@ -1,0 +1,1 @@
+function e(){document.querySelectorAll(`.katex-html`).forEach(e=>{e.setAttribute(`dir`,`ltr`)})}e(),new MutationObserver(()=>{e()}).observe(document.body,{childList:!0,subtree:!0});

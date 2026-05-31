@@ -2,7 +2,7 @@
 
 A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT and Deepseek.
 
-![Extension Screenshot](extension.jpg)
+![Extension Screenshot](public/screenshots/extension.jpg)
 
 ## Table of Contents
 - [Features](#features)
@@ -23,25 +23,42 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 
 ## Installation
 
-### Chrome / Edge / Brave / Opera
+> [!WARNING]
+> Due to internet restrictions in Iran, the extension is currently not available on browser stores.
+> Download the latest release and install it manually using the **Load unpacked** option.
 
-1. Download the latest release: [ai-rtl-resolver-v2.0.zip](https://github.com/miladniroee/ai-rtl-resolver/releases)
-2. Extract the zip file to a permanent folder (don't delete this folder)
-3. Open your browser and navigate to:
-   - **Chrome**: `chrome://extensions/`
-   - **Edge**: `edge://extensions/`
-   - **Brave**: `brave://extensions/`
-   - **Opera**: `opera://extensions/`
-4. Enable **Developer mode** (toggle switch in top-right corner)
-5. Click **Load unpacked**
-6. Select the extracted folder
+### Chrome / Edge / Brave / Opera / Firefox
+
+1. Download the latest release from GitHub Releases.
+2. Extract the downloaded ZIP file.
+3. Open your browser's extensions page:
+
+   * **Chrome:** `chrome://extensions/`
+   * **Edge:** `edge://extensions/`
+   * **Brave:** `brave://extensions/`
+   * **Opera:** `opera://extensions/`
+   * **Firefox:** `about:debugging#/runtime/this-firefox`
+4. Enable **Developer mode** (not required on Firefox).
+5. Click **Load unpacked**.
+6. Select the extracted extension folder.
+
+### Building From Source
+
+```bash
+npm install
+npm run build
+```
+
+The production-ready extension will be generated inside the `dist/` directory.
+
+To load the extension manually, select the generated `dist/` folder using **Load unpacked**.
 
 > [!NOTE]
 > The extension will stay installed as long as you don't delete the extracted folder. Don't move or delete it after loading.
 
 ### Firefox
 
-1. Install from Firefox Add-ons: [AI RTL Resolver](https://addons.mozilla.org/en-US/firefox/addon/ai-rtl-resolver/?utm_source=chatgpt.com)
+1. Install from Firefox Add-ons: [AI RTL Resolver](https://addons.mozilla.org/en-US/firefox/addon/ai-rtl-resolver/)
 2. Click **Add to Firefox**
 3. Open ChatGPT or DeepSeek
 4. RTL text will work automatically

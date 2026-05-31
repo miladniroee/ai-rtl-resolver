@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Ai Chatbot Dir Resolver",
-  "version": "2.0",
+  "version": "3.0",
   "description": "Sets correct direction for persian/arabic language on ai chatbots",
   "author": "Milad Niroee",
   "homepage_url": "https://github.com/miladniroee/ai-rtl-resolver",
