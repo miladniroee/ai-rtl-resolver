@@ -11,6 +11,7 @@ export default defineConfig({
       input: {
         chatgpt: './src/chatgpt.js',
         deepseek: './src/deepseek.js',
+        claude: './src/claude.js',
         loadFonts: './src/loadFonts.js'
       },
 

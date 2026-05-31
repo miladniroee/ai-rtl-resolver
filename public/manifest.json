@@ -17,7 +17,7 @@
   "web_accessible_resources": [
     {
       "resources": ["fonts/*"],
-      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*","https://chat.deepseek.com/*"]
+      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*", "https://chat.deepseek.com/*","https://claude.ai/*"]
     }
   ],
   "icons": {
@@ -35,6 +35,11 @@
     {
       "matches": ["https://chat.deepseek.com/*"],
       "js": ["loadFonts.js", "deepseek.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://claude.ai/*"],
+      "js": ["loadFonts.js", "claude.js"],
       "run_at": "document_end"
     }
   ]
