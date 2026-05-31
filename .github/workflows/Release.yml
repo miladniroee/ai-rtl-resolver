@@ -13,25 +13,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 23
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+          cache: npm
 
-      - run: node -v
-      - run: npm -v
+      - name: Force official npm registry
+        run: npm config set registry https://registry.npmjs.org/
 
-      - run: npm cache clean --force
+      - name: Show environment
+        run: |
+          node -v
+          npm -v
+          npm config get registry
 
-      - run: npm install --verbose
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm run build
+      - name: Build project
+        run: npm run build
 
-      - run: |
+      - name: Create zip package
+        run: |
           cd dist
           zip -r ../ai-rtl-resolver-${{ github.ref_name }}.zip .
 
-      - uses: softprops/action-gh-release@v2
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          files: ai-rtl-resolver-*.zip
+          files: ai-rtl-resolver-${{ github.ref_name }}.zip
