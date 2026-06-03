@@ -67,7 +67,7 @@ To load the extension manually, select the generated `dist/` folder using **Load
 ## Usage
 
 1. Install the extension following the instructions above
-2. Navigate to [ChatGPT](https://chat.openai.com) or [Deepseek](https://chat.deepseek.com) or [Claude](https://claude.ai/)
+2. Navigate to [ChatGPT](https://chat.openai.com) or [Deepseek](https://chat.deepseek.com) or [Claude](https://claude.ai/) or [Perplexity](https://www.perplexity.ai/)
 3. The extension activates automatically
 4. Type or paste RTL text - it will display correctly
 5. Mathematical formulas and code remain LTR
@@ -79,7 +79,7 @@ To load the extension manually, select the generated `dist/` folder using **Load
 | ChatGPT (chat.openai.com) | ✅ Fully supported | - |
 | Deepseek (chat.deepseek.com) | ✅ Fully supported | - |
 | Claude (claude.ai) | ✅ Fully supported | - |
-| Perplexity AI | 🚧 Planned | Coming in v4.0 |
+| Perplexity AI | ✅ Fully supported | - |
 
 *Request a website by [opening an issue](https://github.com/miladniroee/ai-rtl-resolver/issues)*
 
@@ -87,13 +87,13 @@ To load the extension manually, select the generated `dist/` folder using **Load
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v3.1 | Current | Added Claude support |
+| v4.0.0 | Current | Rewrite project using TS, add perplexity |
+| v3.1 | Jun 2026 | Added Claude support |
 | v2.0 | Jan 2026 | Added Deepseek support, improved RTL detection |
 | v1.0 | Initial | Basic ChatGPT support |
 
 ## Roadmap
 
-- [ ] Add support for Perplexity AI
 - [ ] Manual Rtl/Ltr Set for a text
 - [ ] Copy Mathematical texts
 

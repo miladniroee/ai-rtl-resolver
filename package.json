@@ -1,7 +1,7 @@
 {
-  "name": "chatgpt-math-dir-resolver",
-  "version": "3.0.0",
-  "description": "A browser extension that fixes the text direction on Chatgpt and Deepseek.",
+  "name": "ai-rtl-resolver",
+  "version": "4.0.0",
+  "description": "A browser extension that fixes the text direction on Chatgpt, Deepseek, Claude and Perplexity.",
   "main": "dist/chatgpt.js",
   "scripts": {
     "dev": "node scripts/build.mjs",
