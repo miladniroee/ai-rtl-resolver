@@ -46,10 +46,11 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 
 ```bash
 npm install
+npm run typecheck   # optional strict TypeScript check
 npm run build
 ```
 
-The production-ready extension will be generated inside the `dist/` directory.
+Source is written in TypeScript under `src/`. The build emits one self-contained script per content script entry in `dist/` (no shared chunks), which is required for Manifest V3 content scripts.
 
 To load the extension manually, select the generated `dist/` folder using **Load unpacked**.
 

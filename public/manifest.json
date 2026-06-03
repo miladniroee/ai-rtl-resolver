@@ -17,7 +17,13 @@
   "web_accessible_resources": [
     {
       "resources": ["fonts/*"],
-      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*", "https://chat.deepseek.com/*","https://claude.ai/*"]
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://chat.deepseek.com/*",
+        "https://claude.ai/*",
+        "https://www.perplexity.ai/*"
+        ]
     }
   ],
   "icons": {
@@ -29,17 +35,22 @@
   "content_scripts": [
     {
       "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
-      "js": ["loadFonts.js", "chatgpt.js"],
+      "js": ["chatgpt.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["https://chat.deepseek.com/*"],
-      "js": ["loadFonts.js", "deepseek.js"],
+      "js": ["deepseek.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["https://claude.ai/*"],
-      "js": ["loadFonts.js", "claude.js"],
+      "js": ["claude.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://www.perplexity.ai/*"],
+      "js": ["perplexity.js"],
       "run_at": "document_end"
     }
   ]

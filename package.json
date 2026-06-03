@@ -2,10 +2,11 @@
   "name": "chatgpt-math-dir-resolver",
   "version": "3.0.0",
   "description": "A browser extension that fixes the text direction on Chatgpt and Deepseek.",
-  "main": "chatgpt.js",
+  "main": "dist/chatgpt.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev": "node scripts/build.mjs",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/miladniroee/ai-rtl-resolver#readme",
   "devDependencies": {
+    "typescript": "^5.9.3",
     "vite": "^8.0.14"
   }
 }
