@@ -2,9 +2,9 @@
 
 A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude and Deepseek.
 
-![Extension Screenshot](public/screenshots/screenshot1.png)
-![Extension Screenshot](public/screenshots/screenshot2.png)
-![Extension Screenshot](public/screenshots/screenshot3.png)
+![Extension Screenshot](screenshots/screenshot1.png)
+![Extension Screenshot](screenshots/screenshot2.png)
+![Extension Screenshot](screenshots/screenshot3.png)
 
 ## Table of Contents
 - [Features](#features)
