@@ -2,7 +2,9 @@
 
 A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude and Deepseek.
 
-![Extension Screenshot](public/screenshots/extension.jpg)
+![Extension Screenshot](public/screenshots/screenshot1.png)
+![Extension Screenshot](public/screenshots/screenshot2.png)
+![Extension Screenshot](public/screenshots/screenshot3.png)
 
 ## Table of Contents
 - [Features](#features)
@@ -87,7 +89,7 @@ To load the extension manually, select the generated `dist/` folder using **Load
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v4.0.0 | Current | Rewrite project using TS, add perplexity |
+| v4.0 | Current | Rewrite project using TS, add perplexity |
 | v3.1 | Jun 2026 | Added Claude support |
 | v2.0 | Jan 2026 | Added Deepseek support, improved RTL detection |
 | v1.0 | Initial | Basic ChatGPT support |
