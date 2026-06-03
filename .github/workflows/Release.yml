@@ -20,23 +20,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org/
           cache: npm
-
-      - name: Force official npm registry
-        run: npm config set registry https://registry.npmjs.org/
-
-      - name: Show environment
-        run: |
-          node -v
-          npm -v
-          npm config get registry
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build project
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build extension
         run: npm run build
+
+      - name: Verify dist artifacts
+        run: |
+          test -f dist/manifest.json
+          test -f dist/chatgpt.js
+          test -f dist/deepseek.js
+          test -f dist/claude.js
+          test -f dist/perplexity.js
+          test -d dist/fonts
+          test -d dist/icons
 
       - name: Create zip package
         run: |
