@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI RTL Resolver — افزونه رفع جهت متن فارسی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #08080e;
+    --bg2: #0f0f18;
+    --bg3: #14141f;
+    --card: #18182a;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --accent: #8b78ff;
+    --accent2: #a99aff;
+    --accent3: #cfc7ff;
+    --teal: #3fd9a8;
+    --coral: #f07060;
+    --amber: #f5b944;
+    --green: #52d68a;
+    --text: #ede9ff;
+    --text2: #9b96bc;
+    --text3: #54506e;
+    --radius: 14px;
+    --radius-sm: 9px;
+    --font: 'Vazirmatn', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.8;
+  }
+
+  .grid-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(139,120,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,120,255,0.035) 1px, transparent 1px);
+    background-size: 52px 52px;
+  }
+  .orb {
+    position: fixed; border-radius: 50%;
+    filter: blur(110px); pointer-events: none; z-index: 0;
+  }
+  .orb1 { width: 560px; height: 560px; top: -160px; right: -160px; background: rgba(139,120,255,0.11); }
+  .orb2 { width: 420px; height: 420px; bottom: -100px; left: -120px; background: rgba(63,217,168,0.07); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8,8,14,0.82);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 15px 0;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--teal));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 900; color: #fff;
+  }
+  .logo-text { font-size: 14px; font-weight: 700; color: var(--text); }
+  .nav-links { display: flex; gap: 8px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    transition: all 0.18s; cursor: pointer; border: none;
+    font-family: var(--font);
+  }
+  .btn-ghost { color: var(--text2); background: transparent; border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: var(--border2); background: rgba(255,255,255,0.04); }
+  .btn-primary { color: #fff; background: var(--accent); box-shadow: 0 0 22px rgba(139,120,255,0.28); }
+  .btn-primary:hover { background: var(--accent2); box-shadow: 0 0 30px rgba(139,120,255,0.42); transform: translateY(-1px); }
+  .btn-lg { padding: 13px 28px; font-size: 15px; border-radius: 11px; }
+
+  /* HERO */
+  .hero { padding: 88px 0 64px; text-align: center; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px; border-radius: 999px;
+    border: 1px solid rgba(139,120,255,0.3);
+    background: rgba(139,120,255,0.08);
+    font-size: 12px; font-weight: 700;
+    color: var(--accent3); margin-bottom: 28px; letter-spacing: 0;
+  }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+  h1 {
+    font-size: clamp(36px, 7vw, 60px);
+    font-weight: 900; line-height: 1.15;
+    letter-spacing: -1px; margin-bottom: 20px;
+  }
+  .h1-accent { color: var(--accent2); }
+  .hero-desc { font-size: 17px; color: var(--text2); max-width: 500px; margin: 0 auto 36px; line-height: 1.9; font-weight: 400; }
+  .hero-cta-container { margin-bottom: 56px; }
+  .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px;}
+
+  /* DEMO */
+  .demo-wrap {
+    max-width: 640px; margin: 0 auto;
+    border: 1px solid var(--border2); border-radius: 18px;
+    overflow: hidden; background: var(--bg3);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+  }
+  .demo-bar {
+    display: flex; align-items: center; gap: 7px;
+    padding: 13px 18px; background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r{background:#f07060;} .dot-y{background:#f5b944;} .dot-g{background:#52d68a;}
+  .demo-url {
+    flex: 1; text-align: center; font-size: 12px;
+    color: var(--text3); background: var(--bg3);
+    border-radius: 6px; padding: 4px 12px; margin: 0 8px;
+    font-family: monospace;
+  }
+  .chat-msgs { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .msg { display: flex; gap: 10px; align-items: flex-start; }
+  .msg-ltr { flex-direction: row-reverse; }
+  .avatar {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800;
+  }
+  .av-ai { background: linear-gradient(135deg, var(--accent), var(--teal)); color: #fff; }
+  .av-user { background: var(--card); color: var(--text2); border: 1px solid var(--border2); }
+  .bubble {
+    border-radius: 12px; padding: 10px 14px;
+    font-size: 14px; line-height: 1.8; max-width: 460px;
+  }
+  .bubble-ai { background: var(--card); border: 1px solid var(--border); }
+  .bubble-user { background: rgba(139,120,255,0.1); border: 1px solid rgba(139,120,255,0.2); }
+  .fixed-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(63,217,168,0.1); color: var(--teal);
+    border: 1px solid rgba(63,217,168,0.22);
+    font-size: 10px; font-weight: 700; padding: 2px 8px;
+    border-radius: 999px; margin-bottom: 7px;
+  }
+  .code-block {
+    font-family: monospace; font-size: 12px; direction: ltr; text-align: left;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; color: var(--teal); margin-top: 8px;
+  }
+
+  /* SECTION */
+  .section { padding: 80px 0; }
+  .sec-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    color: var(--accent); margin-bottom: 12px; text-transform: uppercase;
+  }
+  h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.3; }
+  .sec-sub { font-size: 16px; color: var(--text2); max-width: 480px; margin-bottom: 44px; }
+
+  /* FEATURES */
+  .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+  .feat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .feat-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .feat-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; margin-bottom: 14px;
+  }
+  .ic-p{background:rgba(139,120,255,0.14);} .ic-t{background:rgba(63,217,168,0.11);}
+  .ic-a{background:rgba(245,185,68,0.11);} .ic-c{background:rgba(240,112,96,0.11);}
+  .ic-g{background:rgba(82,214,138,0.11);} .ic-b{background:rgba(91,171,255,0.11);}
+  .feat-title { font-size: 15px; font-weight: 700; margin-bottom: 7px; }
+  .feat-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; }
+  .stat { background: var(--card); padding: 26px; text-align: center; }
+  .stat-n { font-size: 30px; font-weight: 900; color: var(--accent2); letter-spacing: -1px; }
+  .stat-l { font-size: 13px; color: var(--text2); margin-top: 5px; }
+
+  /* PLATFORMS */
+  .platforms { display: flex; flex-direction: column; gap: 10px; }
+  .plat {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 14px 18px;
+  }
+  .plat-name { font-size: 14px; font-weight: 700; }
+  .plat-url { font-size: 12px; color: var(--text3); margin-top: 2px; font-family: monospace; }
+  .badge {
+    font-size: 11px; font-weight: 700; padding: 4px 11px;
+    border-radius: 999px;
+  }
+  .b-live { background: rgba(82,214,138,0.1); color: var(--green); border: 1px solid rgba(82,214,138,0.2); }
+  .b-soon { background: rgba(245,185,68,0.08); color: var(--amber); border: 1px solid rgba(245,185,68,0.18); }
+
+  /* STEPS */
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .steps-col-title { font-size: 13px; font-weight: 700; color: var(--accent2); margin-bottom: 16px; letter-spacing: 1px; }
+  .steps { display: flex; flex-direction: column; }
+  .step { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+  .step-n {
+    width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%;
+    background: rgba(139,120,255,0.13); border: 1px solid rgba(139,120,255,0.28);
+    color: var(--accent2); font-size: 14px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+  .step-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
+  code { font-size: 12px; color: var(--accent3); font-family: monospace; background: rgba(139,120,255,0.1); padding: 1px 6px; border-radius: 4px; }
+
+  /* CTA */
+  .cta { text-align: center; padding: 80px 0; border-top: 1px solid var(--border); }
+  .cta h2 { margin-bottom: 14px; }
+  .cta p { font-size: 16px; color: var(--text2); margin-bottom: 32px; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); padding: 26px 0;
+    text-align: center; font-size: 13px; color: var(--text3);
+  }
+  footer a { color: var(--text3); text-decoration: none; }
+  footer a:hover { color: var(--text2); }
+
+  @media (max-width: 580px) {
+    .nav-links .btn-ghost { display: none; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="https://miladniroee.github.io/ai-rtl-resolver/" class="logo">
+        <img src="https://raw.githubusercontent.com/miladniroee/ai-rtl-resolver/refs/heads/main/public/icons/icon-32.png" width="32" height="32" alt="Ai RTL Resolver">
+        <span class="logo-text">AI RTL Resolver</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features" class="btn btn-ghost">ویژگی‌ها</a>
+        <a href="#install" class="btn btn-ghost">نصب</a>
+        <a href="https://github.com/miladniroee/ai-rtl-resolver" class="btn btn-ghost" target="_blank">گیت‌هاب</a>
+        <a href="https://chromewebstore.google.com/detail/ai-rtl-resolver/fajdcnieohikiogbngkfedbpfoniobcc" class="btn btn-primary" target="_blank">نصب افزونه</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      متن‌باز · رایگان · بدون جمع‌آوری داده
+    </div>
+    <h1>
+      متن فارسیت رو<br/>
+      <span class="h1-accent">درست کن.</span><br/>
+      یه‌بار برای همیشه.
+    </h1>
+    <p class="hero-desc">
+      دیگه لازم نیست هر بار با جهت متن دست و پنجه نرم کنی.<br/>
+      AI RTL Resolver به‌صورت خودکار متن فارسی، عربی و اردو رو در ChatGPT و DeepSeek درست می‌کنه.
+    </p>
+    <div class="hero-cta-container">
+      <div class="hero-cta">
+        <a href="https://chromewebstore.google.com/detail/ai-rtl-resolver/fajdcnieohikiogbngkfedbpfoniobcc" class="btn btn-primary btn-lg" target="_blank">نصب روی کروم</a>
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/ai-rtl-resolver/" class="btn btn-ghost btn-lg" target="_blank">نصب روی فایرفاکس</a>
+      </div>
+      <a href="https://github.com/miladniroee/ai-rtl-resolver/releases" class="sec-sub" style="text-decoration: none;" target="_blank">دانلود دستی ←</a>
+    </div>
+
+    <!-- DEMO -->
+    <div class="demo-wrap">
+      <div class="demo-bar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="demo-url">claude.ai</span>
+      </div>
+      <div class="chat-msgs">
+        <div class="msg">
+          <div class="avatar av-user">U</div>
+          <div class="bubble bubble-user">
+            سلام! می‌تونی یه برنامه پایتون بنویسی که اعداد اول رو پیدا کنه؟
+          </div>
+        </div>
+        <div class="msg">
+          <div class="avatar av-ai">AI</div>
+          <div class="bubble bubble-ai">
+            <div class="fixed-badge">✓ RTL درست شد</div>
+            <div>البته! اینجا یه برنامه ساده برای پیدا کردن اعداد اول:</div>
+            <div class="code-block">def is_prime(n):<br>&nbsp;&nbsp;if n &lt; 2: return False<br>&nbsp;&nbsp;for i in range(2, int(n**0.5)+1):<br>&nbsp;&nbsp;&nbsp;&nbsp;if n % i == 0: return False<br>&nbsp;&nbsp;return True</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-n">۴+</div>
+        <div class="stat-l">پلتفرم پشتیبانی‌شده</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">صفر</div>
+        <div class="stat-l">نیاز به تنظیمات</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">MIT</div>
+        <div class="stat-l">لایسنس متن‌باز</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="sec-label">ویژگی‌ها</div>
+    <h2>همه چیزی که نیاز داری،<br/>هیچ چیزی که نداری.</h2>
+    <p class="sec-sub">ساخته‌شده برای فارسی‌زبان‌هایی که هر روز از ابزارهای هوش مصنوعی استفاده می‌کنن.</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon ic-p">🔄</div>
+        <div class="feat-title">تشخیص خودکار RTL</div>
+        <div class="feat-desc">متن فارسی، عربی، اردو و عبری رو تشخیص میده و جهتش رو فوری درست می‌کنه.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon ic-t">💻</div>
+        <div class="feat-title">کدها دست‌نخورده می‌مونن</div>
+        <div class="feat-desc">بلوک‌های کد و فرمول‌های ریاضی همیشه LTR می‌مونن. سینتکس خراب نمی‌شه.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon ic-g">⚡</div>
+        <div class="feat-title">نصب کن، فراموش کن</div>
+        <div class="feat-desc">هیچ تنظیمی لازم نیست. همین که نصبش کردی، کارش رو شروع می‌کنه.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon ic-a">🔒</div>
+        <div class="feat-title">کاملاً خصوصی</div>
+        <div class="feat-desc">هیچ داده‌ای جمع‌آوری یا ارسال نمی‌شه. همه چیز توی مرورگر خودت اجرا میشه.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon ic-c">🪶</div>
+        <div class="feat-title">سبک و بی‌صدا</div>
+        <div class="feat-desc">تأثیر بسیار کمی روی پرفورمنس داره. بدون کند شدن مرورگر.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon ic-b">🌐</div>
+        <div class="feat-title">متن‌باز</div>
+        <div class="feat-desc">کد کامل روی گیت‌هاب در دسترسه. می‌تونی بررسی کنی، مشارکت کنی یا فورک بزنی.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="sec-label">پلتفرم‌های پشتیبانی‌شده</div>
+    <h2>هر جایی که کار می‌کنی.</h2>
+    <p class="sec-sub">پلتفرم‌های بیشتری به زودی اضافه می‌شن.</p>
+    <div class="platforms">
+      <div class="plat">
+        <div>
+          <div class="plat-name">ChatGPT</div>
+          <div class="plat-url">chatgpt.com</div>
+        </div>
+        <span class="badge b-live">✓ پشتیبانی کامل</span>
+      </div>
+      <div class="plat">
+        <div>
+          <div class="plat-name">DeepSeek</div>
+          <div class="plat-url">chat.deepseek.com</div>
+        </div>
+        <span class="badge b-live">✓ پشتیبانی کامل</span>
+      </div>
+      <div class="plat">
+        <div>
+          <div class="plat-name">Claude AI</div>
+          <div class="plat-url">claude.ai</div>
+        </div>
+        <span class="badge b-live">✓ پشتیبانی کامل</span>
+      </div>
+      <div class="plat">
+        <div>
+          <div class="plat-name">Perplexity AI</div>
+          <div class="plat-url">perplexity.ai</div>
+        </div>
+        <span class="badge b-live">✓ پشتیبانی کامل</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<section class="section" id="install">
+  <div class="container">
+    <div class="sec-label">نصب</div>
+    <h2>در ۶۰ ثانیه آماده.</h2>
+    <p class="sec-sub">دو روش نصب. هر کدوم که راحت‌تری.</p>
+    <div class="steps-grid">
+      <div>
+        <div class="steps-col-title">کروم وب استور</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">۱</div>
+            <div>
+              <div class="step-title">صفحه افزونه رو باز کن</div>
+              <div class="step-desc">روی دکمه «نصب رایگان روی کروم» بالا کلیک کن.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">۲</div>
+            <div>
+              <div class="step-title">روی «Add to Chrome» کلیک کن</div>
+              <div class="step-desc">دسترسی‌های مورد نیاز رو تأیید کن. هیچ دسترسی خاصی لازم نیست.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">۳</div>
+            <div>
+              <div class="step-title">ChatGPT رو باز کن و بنویس</div>
+              <div class="step-desc">همین. افزونه خودکار فعاله. فارسی بنویس، همه چیز درسته.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="steps-col-title" style="color: var(--teal);">نصب دستی (ایران / بدون فیلترشکن)</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">۱</div>
+            <div>
+              <div class="step-title">فایل ZIP رو از گیت‌هاب دانلود کن</div>
+              <div class="step-desc">از بخش Releases ریپو، آخرین نسخه رو دانلود کن.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">۲</div>
+            <div>
+              <div class="step-title">Developer Mode رو روشن کن</div>
+              <div class="step-desc">به <code>chrome://extensions/</code> برو و Developer Mode رو فعال کن.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">۳</div>
+            <div>
+              <div class="step-title">Load Unpacked رو انتخاب کن</div>
+              <div class="step-desc">ZIP رو Extract کن و فولدر استخراج‌شده رو انتخاب کن.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>آماده‌ای متن فارسیت رو<br/>برای همیشه درست کنی؟</h2>
+    <p>یه‌بار نصب کن، دیگه فکرش رو نکن.</p>
+    <div class="hero-cta-container">
+      <div class="hero-cta">
+        <a href="https://chromewebstore.google.com/detail/ai-rtl-resolver/fajdcnieohikiogbngkfedbpfoniobcc" class="btn btn-primary btn-lg" target="_blank">نصب روی کروم</a>
+        <a href="https://addons.mozilla.org/en-US/firefox/addon/ai-rtl-resolver/" class="btn btn-ghost btn-lg" target="_blank">نصب روی فایرفاکس</a>
+      </div>
+      <a href="https://github.com/miladniroee/ai-rtl-resolver" class="btn btn-ghost btn-lg" target="_blank">⭐ روی گیت‌هاب ستاره بدید</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>ساخته‌شده با ❤️ برای فارسی‌زبان‌ها &nbsp;·&nbsp;
+    <a href="https://github.com/miladniroee/ai-rtl-resolver" target="_blank">گیت‌هاب</a> &nbsp;·&nbsp;
+    <a href="https://github.com/miladniroee/ai-rtl-resolver/blob/main/LICENCE" target="_blank">MIT License</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
