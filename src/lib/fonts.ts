@@ -28,7 +28,7 @@ function injectFontStylesheet(): void {
         font-display: swap;
     }
 
-    .rtl, [dir="rtl"], .vazir{
+    .rtl, [dir="rtl"], .vazir, .user-message-bubble-color{
         font-family: ${VAZIR_FONT_FAMILY} !important;
     }
   `;
