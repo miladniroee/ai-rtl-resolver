@@ -1,6 +1,6 @@
 # Ai RTL Resolver
 
-A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude and Deepseek.
+A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude, Deepseek and Gemeni.
 
 ![Extension Screenshot](screenshots/promo-marquee.png)
 
@@ -23,13 +23,16 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 
 ## Installation
 
-> [!WARNING]
-> Due to internet restrictions in Iran, the extension is currently not available on browser stores.
-> Download the latest release and install it manually using the **Load unpacked** option.
+### 1- Install via Stores
 
-### Chrome / Edge / Brave / Opera / Firefox
+For Chrome based browsers: [Chrome Web Store](https://chromewebstore.google.com/detail/ai-rtl-resolver/fajdcnieohikiogbngkfedbpfoniobcc)
 
-1. Download the latest release from GitHub Releases.
+For Firefox: [Firefox Browser add-ons](https://addons.mozilla.org/en-US/firefox/addon/ai-rtl-resolver/)
+
+
+### 2- Install Manually
+
+1. Download the latest release from GitHub [Releases](https://github.com/miladniroee/ai-rtl-resolver/releases).
 2. Extract the downloaded ZIP file.
 3. Open your browser's extensions page:
 
@@ -42,6 +45,9 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 5. Click **Load unpacked**.
 6. Select the extracted extension folder.
 
+> [!NOTE]
+> The extension will stay installed as long as you don't delete the extracted folder. Don't move or delete it after loading.
+
 ### Building From Source
 
 ```bash
@@ -52,22 +58,15 @@ npm run build
 
 Source is written in TypeScript under `src/`. The build emits one self-contained script per content script entry in `dist/` (no shared chunks), which is required for Manifest V3 content scripts.
 
-To load the extension manually, select the generated `dist/` folder using **Load unpacked**.
-
-> [!NOTE]
-> The extension will stay installed as long as you don't delete the extracted folder. Don't move or delete it after loading.
-
-### Firefox
-
-1. Install from Firefox Add-ons: [AI RTL Resolver](https://addons.mozilla.org/en-US/firefox/addon/ai-rtl-resolver/)
-2. Click **Add to Firefox**
-3. Open ChatGPT or DeepSeek
-4. RTL text will work automatically
-
 ## Usage
 
 1. Install the extension following the instructions above
-2. Navigate to [ChatGPT](https://chat.openai.com) or [Deepseek](https://chat.deepseek.com) or [Claude](https://claude.ai/) or [Perplexity](https://www.perplexity.ai/)
+2. Navigate to chatbots:
+   * [ChatGPT](https://chat.openai.com) 
+   * [Deepseek](https://chat.deepseek.com) 
+   * [Claude](https://claude.ai/)
+   * [Perplexity](https://www.perplexity.ai/)
+   * [Gemeni](https://gemini.google.com/)
 3. The extension activates automatically
 4. Type or paste RTL text - it will display correctly
 5. Mathematical formulas and code remain LTR
@@ -80,6 +79,7 @@ To load the extension manually, select the generated `dist/` folder using **Load
 | Deepseek (chat.deepseek.com) | ✅ Fully supported | - |
 | Claude (claude.ai) | ✅ Fully supported | - |
 | Perplexity AI | ✅ Fully supported | - |
+| Gemeni | ✅ Fully supported | - |
 
 *Request a website by [opening an issue](https://github.com/miladniroee/ai-rtl-resolver/issues)*
 
@@ -87,7 +87,8 @@ To load the extension manually, select the generated `dist/` folder using **Load
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v4.0 | Current | Rewrite project using TS, add perplexity |
+| v4.1 | Current | Add Gemeni, Fix issues |
+| v4.0 | Jun 2026 | Rewrite project using TS, add perplexity |
 | v3.1 | Jun 2026 | Added Claude support |
 | v2.0 | Jan 2026 | Added Deepseek support, improved RTL detection |
 | v1.0 | Initial | Basic ChatGPT support |
@@ -117,3 +118,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made with ❤️ for Persian Speakers**
+
+
+> اصلا نمی‌دونم چرا کل README رو انگلیسی نوشتم، لذت ببرید دیگه...

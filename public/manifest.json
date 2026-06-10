@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Ai RTL Resolver",
-  "version": "4.0.3",
+  "version": "4.1.0",
   "description": "Sets correct direction for persian/arabic language on ai chatbots",
   "author": "Milad Niroee",
   "homepage_url": "https://github.com/miladniroee/ai-rtl-resolver",
@@ -22,7 +22,8 @@
         "https://chat.openai.com/*",
         "https://chat.deepseek.com/*",
         "https://claude.ai/*",
-        "https://www.perplexity.ai/*"
+        "https://www.perplexity.ai/*",
+        "https://gemini.google.com/*"
         ]
     }
   ],
@@ -51,6 +52,11 @@
     {
       "matches": ["https://www.perplexity.ai/*"],
       "js": ["perplexity.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "js": ["gemeni.js"],
       "run_at": "document_end"
     }
   ]
