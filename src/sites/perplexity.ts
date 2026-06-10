@@ -6,7 +6,7 @@ import {
 } from '../lib/dom';
 
 const LTR_ONLY_SELECTOR = '.katex-html, .not-prose, pre, code';
-const APPLY_DIRECTION_SELECTOR = '.prose:not(.not-prose):not(.katext-html), button>div>div';
+const APPLY_DIRECTION_SELECTOR = '#ask-input, .prose:not(.not-prose):not(.katext-html), button>div>div';
 
 function fixPerplexityDirection(): void {
   applyDetectedDirection(
