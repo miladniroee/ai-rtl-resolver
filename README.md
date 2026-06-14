@@ -1,3 +1,8 @@
+![GitHub Release](https://img.shields.io/github/v/release/miladniroee/ai-rtl-resolver?style=for-the-badge&logo=github)
+![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/fajdcnieohikiogbngkfedbpfoniobcc?style=for-the-badge&logo=google%20chrome&logoColor=gold&color=gold)
+![Mozilla Add-on Version](https://img.shields.io/amo/v/ai-rtl-resolver?style=for-the-badge&logo=firefox&color=orange)
+
+
 # Ai RTL Resolver
 
 A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude, Deepseek, Gemeni, and Qwen.
