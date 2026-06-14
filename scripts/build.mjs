@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
-/** @type {readonly ['chatgpt', 'deepseek', 'claude', 'perplexity', 'gemeni']} */
-const entries = ['chatgpt', 'deepseek', 'claude', 'perplexity', 'gemeni'];
+/** @type {readonly ['chatgpt', 'deepseek', 'claude', 'perplexity', 'gemeni','qwen']} */
+const entries = ['chatgpt', 'deepseek', 'claude', 'perplexity', 'gemeni', 'qwen'];
 
 for (let index = 0; index < entries.length; index += 1) {
   const name = entries[index];

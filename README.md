@@ -1,6 +1,6 @@
 # Ai RTL Resolver
 
-A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude, Deepseek and Gemeni.
+A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude, Deepseek, Gemeni, and Qwen.
 
 ![Extension Screenshot](screenshots/promo-marquee.png)
 
@@ -67,6 +67,7 @@ Source is written in TypeScript under `src/`. The build emits one self-contained
    * [Claude](https://claude.ai/)
    * [Perplexity](https://www.perplexity.ai/)
    * [Gemeni](https://gemini.google.com/)
+   * [Qwen](https://chat.qwen.ai/)
 3. The extension activates automatically
 4. Type or paste RTL text - it will display correctly
 5. Mathematical formulas and code remain LTR
@@ -80,6 +81,7 @@ Source is written in TypeScript under `src/`. The build emits one self-contained
 | Claude (claude.ai) | ✅ Fully supported | - |
 | Perplexity AI | ✅ Fully supported | - |
 | Gemeni | ✅ Fully supported | - |
+| Qwen (chat.qwen.ai) | ✅ Fully supported | (Thank to Mimo code) |
 
 *Request a website by [opening an issue](https://github.com/miladniroee/ai-rtl-resolver/issues)*
 
@@ -87,7 +89,8 @@ Source is written in TypeScript under `src/`. The build emits one self-contained
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v4.1 | Current | Add Gemeni, Fix issues |
+| v4.2 | Current | Add Qwen support |
+| v4.1 | Jun 2026 | Add Gemeni, Fix issues |
 | v4.0 | Jun 2026 | Rewrite project using TS, add perplexity |
 | v3.1 | Jun 2026 | Added Claude support |
 | v2.0 | Jan 2026 | Added Deepseek support, improved RTL detection |
