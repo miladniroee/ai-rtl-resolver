@@ -55,7 +55,6 @@ export function detectParagraphDirection(text: string): TextDirection {
       continue;
     }
     
-    console.log(char, isRtlScriptChar(char))
     if (firstMeaningfulIsRtl === null) {
       firstMeaningfulIsRtl = isRtlScriptChar(char);
     }
