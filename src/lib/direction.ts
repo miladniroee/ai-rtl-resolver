@@ -1,6 +1,6 @@
 export type TextDirection = 'ltr' | 'rtl';
 
-const PERSIAN_WEIGHT_PERCENTAGE = 60;
+const PERSIAN_WEIGHT_PERCENTAGE = 50;
 
 const PERSIAN_SCRIPT_REGEX =
   /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
@@ -8,7 +8,7 @@ const PERSIAN_SCRIPT_REGEX =
 const EMOJI_REGEX = /[\p{Emoji}\p{Emoji_Presentation}]/u;
 
 const IGNORABLE_CHAR_REGEX =
-  /[\d\s\u200E\u200F\u200B#@$%^&*()\-+=_{}[\]\\|:;"'<>,.?/~`!]/;
+  /[\d\s\u200E\u200F\u200B#@$%^&*()\-+=_{}[\]\\|:;"'<>,.?/~`!\u00AB\u00BB]/;
 
 function isEmojiLike(char: string): boolean {
   return EMOJI_REGEX.test(char);
@@ -48,16 +48,28 @@ export function detectParagraphDirection(text: string): TextDirection {
   const segments = segmentGraphemes(trimmed);
   let rtlCount = 0;
   let ltrCount = 0;
+  let firstMeaningfulIsRtl: boolean | null = null; // add this
 
   for (const { segment: char } of segments) {
     if (isEmojiLike(char) || isIgnorableChar(char)) {
       continue;
     }
+    
+    console.log(char, isRtlScriptChar(char))
+    if (firstMeaningfulIsRtl === null) {
+      firstMeaningfulIsRtl = isRtlScriptChar(char);
+    }
+
     if (isRtlScriptChar(char)) {
       rtlCount += 1;
     } else {
       ltrCount += 1;
     }
+  }
+
+
+  if (firstMeaningfulIsRtl === true) {
+    return 'rtl';
   }
 
   const totalRelevant = rtlCount + ltrCount;
