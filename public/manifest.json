@@ -1,10 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Ai RTL Resolver",
-  "version": "4.2.1",
+  "version": "5.0.0",
   "description": "Sets correct direction for persian/arabic language on ai chatbots",
   "author": "Milad Niroee",
   "homepage_url": "https://miladniroee.github.io/ai-rtl-resolver",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "mniroee@gmail.com",

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('fonts/Vazirmatn-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Vazirmatn', system-ui, sans-serif;
+      background: #0f0f18;
+      color: #ede9ff;
+      width: 300px;
+      padding: 16px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .logo {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .title { font-size: 14px; font-weight: 700; }
+    .site-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: #18182a;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+    .site-item:last-child { margin-bottom: 0; }
+    .site-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .site-info { flex: 1; }
+    .site-name { font-size: 13px; font-weight: 700; }
+    .site-url { font-size: 11px; color: #9b96bc; font-family: monospace; }
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #54506e;
+      border-radius: 22px;
+      transition: 0.2s;
+    }
+    .slider::before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 3px;
+      bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    .toggle input:checked + .slider { background: #52d68a; }
+    .toggle input:checked + .slider::before { transform: translateX(18px); }
+    #links { margin-top: 15px;}
+    #links, #links a {text-align: center; color: #888; text-decoration: none;}
+    #links a:hover {color:#aaa}
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/miladniroee/ai-rtl-resolver/refs/heads/main/public/icons/icon-32.png" width="32" alt="Ai RTL Resolver">
+    </div>
+    <div class="title">AI RTL Resolver</div>
+  </div>
+  <div id="sites"></div>
+  <div id="links">
+    <a href="https://miladniroee.github.io/ai-rtl-resolver">Homepage</a>
+    <span>&nbsp;&#9679;&nbsp;</span>
+    <a href="https://github.com/miladniroee/ai-rtl-resolver">Github</a>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

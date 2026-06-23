@@ -9,11 +9,23 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 
 ![Extension Screenshot](screenshots/promo-marquee.png)
 
+## Supported Platforms
+
+| Platform | Website |
+|----------|---------|
+| <img src="public/platforms/chatgpt.png" width="20"> ChatGPT | [chatgpt.com](chatgpt.com) |
+| <img src="public/platforms/claude.png" width="20"> Claude | [claude.ai](claude.ai) |
+| <img src="public/platforms/deepseek.png" width="20"> DeepSeek | [chat.deepseek.com](chat.deepseek.com) |
+| <img src="public/platforms/gemini.png" width="20"> Gemini | [gemini.google.com](gemini.google.com) |
+| <img src="public/platforms/perplexity.png" width="20"> Perplexity | [perplexity.ai](perplexity.ai) |
+| <img src="public/platforms/qwen.png" width="20"> Qwen | [chat.qwen.ai](chat.qwen.ai) |
+| <img src="public/platforms/zai.png" width="20"> z.ai | [chat.z.ai](chat.z.ai) |
+| <img src="public/platforms/notebooklm%20.png" width="20"> NotebookLM | [notebooklm.google.com](notebooklm.google.com) |
+
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Supported Websites](#supported-websites)
 - [License](#license)
 - [Support](#support)
 
@@ -50,8 +62,6 @@ For Firefox: [Firefox Browser add-ons](https://addons.mozilla.org/en-US/firefox/
 5. Click **Load unpacked**.
 6. Select the extracted extension folder.
 
-> [!NOTE]
-> The extension will stay installed as long as you don't delete the extracted folder. Don't move or delete it after loading.
 
 ### Building From Source
 
@@ -66,39 +76,18 @@ Source is written in TypeScript under `src/`. The build emits one self-contained
 ## Usage
 
 1. Install the extension following the instructions above
-2. Navigate to chatbots:
-   * [ChatGPT](https://chat.openai.com) 
-   * [Deepseek](https://chat.deepseek.com) 
-   * [Claude](https://claude.ai/)
-   * [Perplexity](https://www.perplexity.ai/)
-   * [Gemeni](https://gemini.google.com/)
-   * [Qwen](https://chat.qwen.ai/)
-   * [z.ai](https://chat.z.ai/)
-   * [NotebookLM](https://notebooklm.google.com/)
+2. Navigate to any supported platform
 3. The extension activates automatically
 4. Type or paste RTL text - it will display correctly
 5. Mathematical formulas and code remain LTR
-
-## Supported Websites
-
-| Website | Status | Notes |
-|---------|--------|-------|
-| ChatGPT (chat.openai.com) | ✅ Fully supported | - |
-| Deepseek (chat.deepseek.com) | ✅ Fully supported | - |
-| Claude (claude.ai) | ✅ Fully supported | - |
-| Perplexity AI | ✅ Fully supported | - |
-| Gemeni | ✅ Fully supported | - |
-| Qwen (chat.qwen.ai) | ✅ Fully supported | (Thank to Mimo code) |
-| z.ai (chat.z.ai) | ✅ Fully supported | - |
-| NotebookLM | ✅ Fully supported | - |
-
-*Request a website by [opening an issue](https://github.com/miladniroee/ai-rtl-resolver/issues)*
+6. Click the extension icon to enable/disable per platform
 
 ## Version History
 
 | Version | Date | Changes |
 |---------|------|---------|
-| v4.2 | Current | Add Qwen support |
+| v5.0 | Current | Add per-site toggle, add z.ai, add NotebookLM |
+| v4.2 | Jun 2026 | Add Qwen support |
 | v4.1 | Jun 2026 | Add Gemeni, Fix issues |
 | v4.0 | Jun 2026 | Rewrite project using TS, add perplexity |
 | v3.1 | Jun 2026 | Added Claude support |

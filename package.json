@@ -1,6 +1,6 @@
 {
   "name": "ai-rtl-resolver",
-  "version": "4.2.1",
+  "version": "5.0.0",
   "description": "A browser extension that fixes the text direction on Chatgpt, Deepseek, Claude and Perplexity.",
   "main": "dist/chatgpt.js",
   "scripts": {
