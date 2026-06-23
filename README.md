@@ -5,7 +5,7 @@
 
 # Ai RTL Resolver
 
-A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude, Deepseek, Gemeni, and Qwen.
+A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude, Deepseek, Gemeni, Qwen, and z.ai.
 
 ![Extension Screenshot](screenshots/promo-marquee.png)
 
@@ -73,6 +73,7 @@ Source is written in TypeScript under `src/`. The build emits one self-contained
    * [Perplexity](https://www.perplexity.ai/)
    * [Gemeni](https://gemini.google.com/)
    * [Qwen](https://chat.qwen.ai/)
+   * [z.ai](https://chat.z.ai/)
 3. The extension activates automatically
 4. Type or paste RTL text - it will display correctly
 5. Mathematical formulas and code remain LTR
@@ -87,6 +88,7 @@ Source is written in TypeScript under `src/`. The build emits one self-contained
 | Perplexity AI | ✅ Fully supported | - |
 | Gemeni | ✅ Fully supported | - |
 | Qwen (chat.qwen.ai) | ✅ Fully supported | (Thank to Mimo code) |
+| z.ai (chat.z.ai) | ✅ Fully supported | - |
 
 *Request a website by [opening an issue](https://github.com/miladniroee/ai-rtl-resolver/issues)*
 

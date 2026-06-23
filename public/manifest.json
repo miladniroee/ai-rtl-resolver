@@ -24,7 +24,8 @@
         "https://claude.ai/*",
         "https://www.perplexity.ai/*",
         "https://gemini.google.com/*",
-        "https://chat.qwen.ai/*"
+        "https://chat.qwen.ai/*",
+        "https://chat.z.ai/*"
         ]
     }
   ],
@@ -63,6 +64,11 @@
     {
       "matches": ["https://chat.qwen.ai/*"],
       "js": ["qwen.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://z.ai/*", "https://chat.z.ai/*"],
+      "js": ["zai.js"],
       "run_at": "document_end"
     }
   ]
