@@ -21,7 +21,7 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 | <img src="public/platforms/qwen.png" width="20"> Qwen | [chat.qwen.ai](chat.qwen.ai) |
 | <img src="public/platforms/zai.png" width="20"> z.ai | [chat.z.ai](chat.z.ai) |
 | <img src="public/platforms/notebooklm%20.png" width="20"> NotebookLM | [notebooklm.google.com](notebooklm.google.com) |
-| <img src="public/platforms/aistudio.png" width="20"> NotebookLM | [aistudio.google.com](aistudio.google.com) |
+| <img src="public/platforms/aistudio.png" width="20"> Ai Studio | [aistudio.google.com](aistudio.google.com) |
 
 ## Table of Contents
 - [Features](#features)
