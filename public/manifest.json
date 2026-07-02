@@ -36,7 +36,8 @@
         "https://gemini.google.com/*",
         "https://chat.qwen.ai/*",
         "https://chat.z.ai/*",
-        "https://notebooklm.google.com/*"
+        "https://notebooklm.google.com/*",
+        "https://aistudio.google.com/*"
         ]
     }
   ],
@@ -85,6 +86,11 @@
     {
       "matches": ["https://notebooklm.google.com/*"],
       "js": ["notebooklm.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://aistudio.google.com/*"],
+      "js": ["aistudio.js"],
       "run_at": "document_end"
     }
   ]
