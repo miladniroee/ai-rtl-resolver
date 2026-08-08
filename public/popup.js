@@ -12,8 +12,11 @@ const SITES = [
 ];
 
 const container = document.getElementById('sites');
+const fontFamilySelect = document.getElementById('fontFamily');
+const fontSizeInput = document.getElementById('fontSize');
 
 async function init() {
+  // Initialize sites toggles
   const { disabledSites = [] } = await chrome.storage.local.get('disabledSites');
 
   container.innerHTML = SITES.map(site => {
@@ -47,6 +50,40 @@ async function init() {
         }
         await chrome.storage.local.set({ disabledSites });
       }
+    });
+  });
+
+  // Initialize font settings
+  const fontSettings = await chrome.storage.local.get('fontSettings');
+  const settings = fontSettings.fontSettings || { fontFamily: 'Vazirmatn', fontSize: 16 };
+  
+  fontFamilySelect.value = settings.fontFamily || 'Vazirmatn';
+  fontSizeInput.value = settings.fontSize || 16;
+
+  // Handle font family change
+  fontFamilySelect.addEventListener('change', async (e) => {
+    const fontFamily = e.target.value;
+    const { fontSettings = {} } = await chrome.storage.local.get('fontSettings');
+    const current = fontSettings || { fontFamily: 'Vazirmatn', fontSize: 16 };
+    await chrome.storage.local.set({
+      fontSettings: { fontFamily, fontSize: current.fontSize }
+    });
+  });
+
+  // Handle font size change
+  fontSizeInput.addEventListener('change', async (e) => {
+    let fontSize = parseInt(e.target.value, 10);
+    
+    // Validate
+    if (isNaN(fontSize) || fontSize < 8) fontSize = 8;
+    if (fontSize > 72) fontSize = 72;
+    
+    fontSizeInput.value = fontSize;
+    
+    const { fontSettings = {} } = await chrome.storage.local.get('fontSettings');
+    const current = fontSettings || { fontFamily: 'Vazirmatn', fontSize: 16 };
+    await chrome.storage.local.set({
+      fontSettings: { fontFamily: current.fontFamily, fontSize }
     });
   });
 }

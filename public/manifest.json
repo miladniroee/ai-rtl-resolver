@@ -37,10 +37,11 @@
         "https://chat.qwen.ai/*",
         "https://chat.z.ai/*",
         "https://notebooklm.google.com/*",
+        "https://notebook.google.com/*",
         "https://duck.ai/*",
         "https://chat.duckduckgo.com/*",
         "https://www.kimi.com/*"
-        ]
+      ]
     }
   ],
   "icons": {
@@ -86,7 +87,7 @@
       "run_at": "document_end"
     },
     {
-      "matches": ["https://notebooklm.google.com/*"],
+      "matches": ["https://notebook.google.com/*"],
       "js": ["notebooklm.js"],
       "run_at": "document_end"
     },

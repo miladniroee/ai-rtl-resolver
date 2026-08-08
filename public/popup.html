@@ -34,6 +34,15 @@
       justify-content: center;
     }
     .title { font-size: 13px; font-weight: 700; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #b0acff;
+      margin-top: 12px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
     .sites {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -93,6 +102,42 @@
     .toggle input:checked + .slider { background: #52d68a; }
     .toggle input:checked + .slider::before { transform: translateX(12px); }
 
+    .font-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      background: #18182a;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .control-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .control-input {
+      padding: 6px 8px;
+      background: #0f0f18;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      color: #ede9ff;
+      font-size: 12px;
+      font-family: inherit;
+    }
+    .control-input:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.15);
+      background: #141420;
+    }
+
     #links, #links a { font-size: 10px; color: #666; text-decoration: none; }
     #links a:hover { color: #999; }
     .footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px;}
@@ -106,14 +151,33 @@
     </div>
     <div class="title">AI RTL Resolver</div>
   </div>
+  
+  <div class="section-title">Sites</div>
   <div id="sites" class="sites"></div>
+  
+  <div class="section-title">Font Settings</div>
+  <div class="font-controls">
+    <div class="control-group">
+      <label class="control-label">Font Family</label>
+      <select id="fontFamily" class="control-input">
+        <option value="Vazirmatn">Vazirmatn</option>
+        <option value="Lalezar">Lalezar</option>
+        <option value="Parastoo">Parastoo</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Font Size (8-72px)</label>
+      <input type="number" id="fontSize" class="control-input" min="8" max="72" value="16">
+    </div>
+  </div>
+  
   <div class="footer">
     <div id="links">
       <a href="https://miladniroee.github.io/ai-rtl-resolver" target="_blank">Homepage</a>
       <span>&nbsp;&#9679;&nbsp;</span>
       <a href="https://github.com/miladniroee/ai-rtl-resolver" target="_blank">Github</a>
     </div>
-    <span>By Milad Niroee</div>
+    <span>By Milad Niroee</span>
   </div>
   <script src="popup.js"></script>
 </body>
