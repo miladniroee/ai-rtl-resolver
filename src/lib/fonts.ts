@@ -9,16 +9,25 @@ interface FontSettings {
   fontSize: number;
 }
 
-const GOOGLE_FONTS_URL = 'https://fonts.googleapis.com/css2?family=Lalezar:wght@400&family=Parastoo:wght@400;700&family=Vazirmatn:wght@400;700&display=swap';
+const FONT_FAMILIES = {
+  Vazirmatn: "'Vazirmatn', 'Arial', 'Segoe UI', sans-serif",
+  Lalezar: "'Lalezar', 'Arial', 'Segoe UI', sans-serif",
+  Parastoo: "'Parastoo', 'Arial', 'Segoe UI', sans-serif",
+} as const;
 
 async function getFontSettings(): Promise<FontSettings> {
   return new Promise((resolve) => {
     if (typeof chrome === 'undefined' || !chrome.storage?.local) {
-      resolve({ fontFamily: 'Vazirmatn', fontSize: 16 });
+      resolve({
+        fontFamily: 'Vazirmatn',
+        fontSize: 16,
+      });
       return;
     }
+
     chrome.storage.local.get('fontSettings').then((result) => {
       const stored = (result.fontSettings ?? {}) as Partial<FontSettings>;
+
       resolve({
         fontFamily: stored.fontFamily ?? 'Vazirmatn',
         fontSize: stored.fontSize ?? 16,
@@ -28,15 +37,60 @@ async function getFontSettings(): Promise<FontSettings> {
 }
 
 function injectFontStylesheet(settings: FontSettings): void {
-  const style = document.createElement('style');
-  style.textContent = `
-    @import url('${GOOGLE_FONTS_URL}');
+  const fontUrls = {
+    Vazirmatn: {
+      regular: chrome.runtime.getURL('fonts/Vazirmatn-Regular.woff2'),
+      bold: chrome.runtime.getURL('fonts/Vazirmatn-Bold.woff2'),
+    },
+    Lalezar: {
+      regular: chrome.runtime.getURL('fonts/Lalezar-Regular.woff2'),
+    },
+    Parastoo: {
+      regular: chrome.runtime.getURL('fonts/Parastoo-Regular.woff2'),
+      bold: chrome.runtime.getURL('fonts/Parastoo-Bold.woff2'),
+    },
+  };
 
-    .rtl, [dir="rtl"], .vazir, .user-message-bubble-color {
-      font-family: '${settings.fontFamily}', 'Arial', 'Segoe UI', sans-serif !important;
+  const selectedFont = fontUrls[settings.fontFamily];
+
+  let fontFaceRules = '';
+
+  fontFaceRules += `
+    @font-face {
+      font-family: '${settings.fontFamily}';
+      src: url('${selectedFont.regular}') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+  `;
+
+  if ('bold' in selectedFont) {
+    fontFaceRules += `
+      @font-face {
+        font-family: '${settings.fontFamily}';
+        src: url('${selectedFont.bold}') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+    `;
+  }
+
+  const style = document.createElement('style');
+
+  style.textContent = `
+    ${fontFaceRules}
+
+    * {
+      font-family: ${FONT_FAMILIES[settings.fontFamily]} !important;
+    }
+
+    body {
       font-size: ${settings.fontSize}px !important;
     }
   `;
+
   document.head.appendChild(style);
 }
 

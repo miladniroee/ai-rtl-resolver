@@ -20,7 +20,7 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 | <img src="public/platforms/perplexity.png" width="20"> Perplexity | [perplexity.ai](perplexity.ai) |
 | <img src="public/platforms/qwen.png" width="20"> Qwen | [chat.qwen.ai](chat.qwen.ai) |
 | <img src="public/platforms/zai.png" width="20"> z.ai | [chat.z.ai](chat.z.ai) |
-| <img src="public/platforms/notebooklm%20.png" width="20"> Gemini Notebook | [notebooklm.google.com](notebooklm.google.com) |
+| <img src="public/platforms/notebooklm%20.png" width="20"> Gemini Notebook | [notebook.google.com](notebook.google.com) |
 | <img src="public/platforms/duckai.png" width="20"> Duck.ai | [duck.ai](duck.ai) |
 | <img src="public/platforms/kimi.png" width="20"> Kimi | [kimi.com](kimi.com) |
 

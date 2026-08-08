@@ -6,7 +6,7 @@ const SITES = [
   { name: 'Perplexity', url: 'perplexity.ai', id: 'perplexity', icon: 'platforms/perplexity.png' },
   { name: 'Qwen', url: 'chat.qwen.ai', id: 'qwen', icon: 'platforms/qwen.png' },
   { name: 'z.ai', url: 'chat.z.ai', id: 'zai', icon: 'platforms/zai.png' },
-  { name: 'Gemini Notebook', url: 'notebooklm.google.com', id: 'notebooklm', icon: 'platforms/notebooklm .png' },
+  { name: 'Gemini Notebook', url: 'notebook.google.com', id: 'notebooklm', icon: 'platforms/notebooklm .png' },
   { name: 'Duck.ai', url: 'duck.ai', id: 'duckai', icon: 'platforms/duckai.png' },
   { name: 'Kimi', url: 'kimi.com', id: 'kimi', icon: 'platforms/kimi.png' },
 ];
@@ -14,6 +14,12 @@ const SITES = [
 const container = document.getElementById('sites');
 const fontFamilySelect = document.getElementById('fontFamily');
 const fontSizeInput = document.getElementById('fontSize');
+
+const refreshNotice = document.getElementById('refresh-notice');
+
+function showRefreshNotice(){
+  refreshNotice.hidden = false;
+}
 
 async function init() {
   // Initialize sites toggles
@@ -50,6 +56,7 @@ async function init() {
         }
         await chrome.storage.local.set({ disabledSites });
       }
+      showRefreshNotice();
     });
   });
 
@@ -68,6 +75,7 @@ async function init() {
     await chrome.storage.local.set({
       fontSettings: { fontFamily, fontSize: current.fontSize }
     });
+    showRefreshNotice();
   });
 
   // Handle font size change
@@ -85,6 +93,7 @@ async function init() {
     await chrome.storage.local.set({
       fontSettings: { fontFamily: current.fontFamily, fontSize }
     });
+    showRefreshNotice();
   });
 }
 

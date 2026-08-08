@@ -2,6 +2,16 @@
 
 All notable changes to AI RTL Resolver will be documented in this file.
 
+
+## [5.1.1] - 2026-08-08
+
+### Added
+- Support Multi fonts on popup panel.
+
+### Changed
+- Modify all notebooklm links to notebook.
+
+
 ## [5.1] - 2026-07-21
 
 ### Added
@@ -99,6 +109,6 @@ All notable changes to AI RTL Resolver will be documented in this file.
 | Perplexity | perplexity.ai | ✅ Supported |
 | Qwen | chat.qwen.ai | ✅ Supported |
 | z.ai | chat.z.ai | ✅ Supported |
-| Gemini Notebook | notebooklm.google.com | ✅ Supported |
+| Gemini Notebook | notebook.google.com | ✅ Supported |
 | Duck.ai | duck.ai | ✅ Supported |
 | Kimi | kimi.com | ✅ Supported |

@@ -142,6 +142,16 @@
     #links a:hover { color: #999; }
     .footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px;}
     .footer>span { font-size: 10px; color: #666}
+    #refresh-notice{
+      background: linear-gradient(298deg, #ff7777, #ffbebe);
+      color: black;
+      padding: 12px;
+      text-align: center;
+      margin-top: 7px;
+      font-weight: bold;
+      border-radius: 5px;
+      border: 1px solid red;
+    }
   </style>
 </head>
 <body>
@@ -178,6 +188,9 @@
       <a href="https://github.com/miladniroee/ai-rtl-resolver" target="_blank">Github</a>
     </div>
     <span>By Milad Niroee</span>
+  </div>
+  <div id="refresh-notice" class="refresh-notice" hidden>
+    Please refresh the page for the changes to take effect.
   </div>
   <script src="popup.js"></script>
 </body>
