@@ -2,6 +2,11 @@
 
 All notable changes to AI RTL Resolver will be documented in this file.
 
+## [5.1.2] - 2026-08-11
+
+### Fixed
+- Gemini and Claude icon issues
+
 
 ## [5.1.1] - 2026-08-08
 
