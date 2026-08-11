@@ -2,6 +2,16 @@
 
 All notable changes to AI RTL Resolver will be documented in this file.
 
+
+## [5.1.3] - 2026-08-11
+
+### Changed
+- Change persian weight from 50 to 30.
+
+### Fixed
+- Qwen AI detect rtl texts when there is ltr phrase.
+
+
 ## [5.1.2] - 2026-08-11
 
 ### Fixed

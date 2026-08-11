@@ -17,7 +17,7 @@ const RESPONSE_BLOCKS = ['p', 'li', 'h1', 'h2', 'h3', 'h4', 'blockquote']
 const INPUT_SELECTOR = 'textarea[class*="MessageInput__TextArea"]';
 
 const DIRECTION_TARGET_SELECTOR =
-  `.chat-user-message,.response-message-content,${RESPONSE_BLOCKS},${INPUT_SELECTOR}, table`;
+  `.chat-user-message,.response-message-content,${RESPONSE_BLOCKS},${INPUT_SELECTOR}, table, .qwen-markdown-paragraph`;
 
 function fixQwenDirection(): void {
   applyDetectedDirection(
