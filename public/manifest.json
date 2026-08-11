@@ -77,7 +77,7 @@
       "run_at": "document_end"
     },
     {
-      "matches": ["https://chat.qwen.ai/*"],
+      "matches": ["https://chat.qwen.ai/*","https://qwen.ai/*"],
       "js": ["qwen.js"],
       "run_at": "document_end"
     },

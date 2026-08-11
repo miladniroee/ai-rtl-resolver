@@ -11,7 +11,7 @@ export function setElementDirection(
 }
 
 export function applyDetectedDirection(
-  elements: NodeListOf<Element>,
+  elements: Iterable<Element>,
   getText: (element: Element) => string,
 ): void {
   for (const element of elements) {
