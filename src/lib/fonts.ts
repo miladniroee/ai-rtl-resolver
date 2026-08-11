@@ -82,13 +82,10 @@ function injectFontStylesheet(settings: FontSettings): void {
   style.textContent = `
     ${fontFaceRules}
 
-    * {
+    .rtl, [dir="rtl"], .vazir, .user-message-bubble-color {
       font-family: ${FONT_FAMILIES[settings.fontFamily]} !important;
     }
 
-    body {
-      font-size: ${settings.fontSize}px !important;
-    }
   `;
 
   document.head.appendChild(style);
