@@ -22,21 +22,15 @@ function isRtlScriptChar(char: string): boolean {
   return PERSIAN_SCRIPT_REGEX.test(char);
 }
 
-function segmentGraphemes(text: string): readonly Intl.SegmentData[] {
-  const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' });
-  return [...segmenter.segment(text)];
-}
+// Constructing an Intl.Segmenter is expensive, and this runs once per element on
+// every observer pass. Build it once, lazily, and reuse it.
+let graphemeSegmenter: Intl.Segmenter | undefined;
 
-function directionFromFirstMeaningfulChar(
-  segments: readonly Intl.SegmentData[],
-): TextDirection {
-  for (const { segment: char } of segments) {
-    if (isEmojiLike(char) || isIgnorableChar(char)) {
-      continue;
-    }
-    return isRtlScriptChar(char) ? 'rtl' : 'ltr';
-  }
-  return 'ltr';
+function segmentGraphemes(text: string): Intl.Segments {
+  const segmenter =
+    graphemeSegmenter ?? new Intl.Segmenter('en', { granularity: 'grapheme' });
+  graphemeSegmenter = segmenter;
+  return segmenter.segment(text);
 }
 
 export function detectParagraphDirection(text: string): TextDirection {
@@ -45,39 +39,40 @@ export function detectParagraphDirection(text: string): TextDirection {
     return 'ltr';
   }
 
-  const segments = segmentGraphemes(trimmed);
   let rtlCount = 0;
   let ltrCount = 0;
-  let firstMeaningfulIsRtl: boolean | null = null; // add this
+  let sawMeaningfulChar = false;
 
-  for (const { segment: char } of segments) {
+  // Iterated lazily so the RTL-first case (the common one here) can bail out
+  // after a couple of graphemes instead of scanning the whole paragraph.
+  for (const { segment: char } of segmentGraphemes(trimmed)) {
     if (isEmojiLike(char) || isIgnorableChar(char)) {
       continue;
     }
-    
-    if (firstMeaningfulIsRtl === null) {
-      firstMeaningfulIsRtl = isRtlScriptChar(char);
+
+    const isRtl = isRtlScriptChar(char);
+
+    // The first meaningful character wins outright, so the weight below only
+    // ever decides LTR-first text.
+    if (!sawMeaningfulChar) {
+      if (isRtl) {
+        return 'rtl';
+      }
+      sawMeaningfulChar = true;
     }
 
-    if (isRtlScriptChar(char)) {
+    if (isRtl) {
       rtlCount += 1;
     } else {
       ltrCount += 1;
     }
   }
 
-
-  if (firstMeaningfulIsRtl === true) {
-    return 'rtl';
-  }
-
   const totalRelevant = rtlCount + ltrCount;
-  if (totalRelevant > 0) {
-    const rtlPercentage = (rtlCount / totalRelevant) * 100;
-    if (rtlPercentage > PERSIAN_WEIGHT_PERCENTAGE) {
-      return 'rtl';
-    }
+  if (totalRelevant === 0) {
+    return 'ltr';
   }
 
-  return directionFromFirstMeaningfulChar(segments);
+  const rtlPercentage = (rtlCount / totalRelevant) * 100;
+  return rtlPercentage > PERSIAN_WEIGHT_PERCENTAGE ? 'rtl' : 'ltr';
 }

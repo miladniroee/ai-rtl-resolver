@@ -2,6 +2,10 @@
 
 All notable changes to AI RTL Resolver will be documented in this file.
 
+## [5.1.4] - 2026-08-26
+
+### Fixed
+- ChatGPT unresponsible when extension is enabled.
 
 ## [5.1.3] - 2026-08-11
 

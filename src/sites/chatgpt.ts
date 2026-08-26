@@ -11,7 +11,7 @@ function applyDirectionToChatgpt(): void {
 }
 
 export function initChatgpt(): void {
-  observeBodyMutations(applyDirectionToChatgpt);
   applyDirectionToChatgpt();
+  observeBodyMutations(applyDirectionToChatgpt);
   initKatexDirectionFix();
 }
