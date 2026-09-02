@@ -2,6 +2,16 @@
 
 All notable changes to AI RTL Resolver will be documented in this file.
 
+## [5.1.5] - 2026-09-02
+
+### Added
+- Interactive live demo on the landing page (docs)
+- Browser-aware install buttons on the landing page
+- Latest version badge and changelog section on the landing page
+
+### Changed
+- Complete redesign of the landing page (docs)
+
 ## [5.1.4] - 2026-08-26
 
 ### Fixed
