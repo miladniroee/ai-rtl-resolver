@@ -40,7 +40,10 @@
         "https://notebook.google.com/*",
         "https://duck.ai/*",
         "https://chat.duckduckgo.com/*",
-        "https://www.kimi.com/*"
+        "https://www.kimi.com/*",
+        "https://app.notion.com/*",
+        "https://www.notion.so/*",
+        "https://notion.so/*"
       ]
     }
   ],
@@ -99,6 +102,11 @@
     {
       "matches": ["https://www.kimi.com/*"],
       "js": ["kimi.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://app.notion.com/*", "https://www.notion.so/*", "https://notion.so/*"],
+      "js": ["notion.js"],
       "run_at": "document_end"
     }
   ]

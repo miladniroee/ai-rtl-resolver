@@ -2,6 +2,13 @@
 
 All notable changes to AI RTL Resolver will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- Notion AI chat support (app.notion.com). Scoped to the AI chat only; regular Notion pages are untouched.
+- `observeBodyMutations` option to also watch in-place text edits (streamed replies).
+- Optional scope for font injection.
+
 ## [5.1.5] - 2026-09-02
 
 ### Added

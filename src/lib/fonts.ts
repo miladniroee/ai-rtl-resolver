@@ -36,7 +36,7 @@ async function getFontSettings(): Promise<FontSettings> {
   });
 }
 
-function injectFontStylesheet(settings: FontSettings): void {
+function injectFontStylesheet(settings: FontSettings, scopeSelector?: string): void {
   const fontUrls = {
     Vazirmatn: {
       regular: chrome.runtime.getURL('fonts/Vazirmatn-Regular.woff2'),
@@ -82,7 +82,7 @@ function injectFontStylesheet(settings: FontSettings): void {
   style.textContent = `
     ${fontFaceRules}
 
-    .rtl, [dir="rtl"], .vazir, .user-message-bubble-color {
+    ${buildFontTargetSelector(scopeSelector)} {
       font-family: ${FONT_FAMILIES[settings.fontFamily]} !important;
     }
 
@@ -91,8 +91,19 @@ function injectFontStylesheet(settings: FontSettings): void {
   document.head.appendChild(style);
 }
 
-export async function initFontInjection(): Promise<void> {
+const FONT_TARGETS = '.rtl, [dir="rtl"], .vazir, .user-message-bubble-color';
+
+// With a scope, only matching elements inside (or equal to) the scope roots get
+// the font, e.g. just the AI chat on a site that also hosts other content.
+function buildFontTargetSelector(scopeSelector?: string): string {
+  if (!scopeSelector) {
+    return FONT_TARGETS;
+  }
+  return `:is(${scopeSelector}) :is(${FONT_TARGETS}), :is(${scopeSelector}):is(${FONT_TARGETS})`;
+}
+
+export async function initFontInjection(scopeSelector?: string): Promise<void> {
   void chrome.runtime.sendMessage(INJECT_FONT_MESSAGE);
   const settings = await getFontSettings();
-  injectFontStylesheet(settings);
+  injectFontStylesheet(settings, scopeSelector);
 }
