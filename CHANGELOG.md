@@ -5,6 +5,7 @@ All notable changes to AI RTL Resolver will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- Grok (grok.com) support, with the selected font added as a fallback to Grok's own font stacks (text and code).
 - Notion AI chat support (app.notion.com). Scoped to the AI chat only; regular Notion pages are untouched.
 - `observeBodyMutations` option to also watch in-place text edits (streamed replies).
 - Optional scope for font injection.

@@ -43,7 +43,8 @@
         "https://www.kimi.com/*",
         "https://app.notion.com/*",
         "https://www.notion.so/*",
-        "https://notion.so/*"
+        "https://notion.so/*",
+        "https://grok.com/*"
       ]
     }
   ],
@@ -107,6 +108,11 @@
     {
       "matches": ["https://app.notion.com/*", "https://www.notion.so/*", "https://notion.so/*"],
       "js": ["notion.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://grok.com/*"],
+      "js": ["grok.js"],
       "run_at": "document_end"
     }
   ]
