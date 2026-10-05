@@ -2,6 +2,20 @@
 
 All notable changes to AI RTL Resolver will be documented in this file.
 
+## [5.2.0] - 2026-10-05
+
+### Added
+- Grok (grok.com) support: the selected font is registered as an extra face under Grok's own font families, limited to the Persian Unicode range, so Latin keeps Grok's font and Persian gets ours.
+- Notion AI chat support (app.notion.com). Scoped to the AI chat only; regular Notion pages are untouched.
+- `observeBodyMutations` option to also watch in-place text edits (streamed replies).
+- Optional scope for font injection.
+
+### Fixed
+- Grok: list-item paragraphs now follow their list, so an English item in a Persian list stays on the bullet's side.
+- Grok: the RTL font rule no longer replaces Grok's per-element fonts for Latin text.
+- Notion: visible-text extraction is memoized, so streaming replies no longer re-walk every prior block on each token.
+- Landing page (docs) and README updated for the new platforms and version.
+
 ## [5.1.5] - 2026-09-02
 
 ### Added
@@ -141,3 +155,5 @@ All notable changes to AI RTL Resolver will be documented in this file.
 | Gemini Notebook | notebook.google.com | ✅ Supported |
 | Duck.ai | duck.ai | ✅ Supported |
 | Kimi | kimi.com | ✅ Supported |
+| Notion AI | app.notion.com | ✅ Supported |
+| Grok | grok.com | ✅ Supported |

@@ -114,7 +114,17 @@ function scheduleFlush(): void {
  * render and hangs the tab. A frame callback is a task, so the page always paints
  * between passes and the worst case degrades to one pass per frame.
  */
-export function observeBodyMutations(onMutate: () => void): void {
+export interface ObserveBodyOptions {
+  /** Also react to in-place text node edits (e.g. streamed tokens). */
+  readonly characterData?: boolean;
+}
+
+let observeCharacterData = false;
+
+export function observeBodyMutations(
+  onMutate: () => void,
+  options: ObserveBodyOptions = {},
+): void {
   const { body } = document;
   if (!body) {
     return;
@@ -124,7 +134,14 @@ export function observeBodyMutations(onMutate: () => void): void {
 
   const observer = bodyObserver ?? new MutationObserver(scheduleFlush);
   bodyObserver = observer;
-  observer.observe(body, { childList: true, subtree: true });
+  // Options are sticky: once any caller asks for characterData it stays on.
+  // Re-observing the same node replaces the previous options.
+  observeCharacterData = observeCharacterData || options.characterData === true;
+  observer.observe(body, {
+    childList: true,
+    subtree: true,
+    characterData: observeCharacterData,
+  });
 }
 
 export function getElementText(element: Element): string {

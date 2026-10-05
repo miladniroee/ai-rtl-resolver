@@ -9,6 +9,8 @@ const SITES = [
   { name: 'Gemini Notebook', url: 'notebook.google.com', id: 'notebooklm', icon: 'platforms/notebooklm .png' },
   { name: 'Duck.ai', url: 'duck.ai', id: 'duckai', icon: 'platforms/duckai.png' },
   { name: 'Kimi', url: 'kimi.com', id: 'kimi', icon: 'platforms/kimi.png' },
+  { name: 'Notion AI', url: 'app.notion.com', id: 'notion', icon: 'platforms/notion.png' },
+  { name: 'Grok', url: 'grok.com', id: 'grok', icon: 'platforms/grok.png' },
 ];
 
 const container = document.getElementById('sites');

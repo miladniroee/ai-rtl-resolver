@@ -4,9 +4,14 @@ interface InjectFontMessage {
 
 const INJECT_FONT_MESSAGE: InjectFontMessage = { action: 'injectFont' };
 
-interface FontSettings {
+export interface FontSettings {
   fontFamily: 'Vazirmatn' | 'Lalezar' | 'Parastoo';
   fontSize: number;
+}
+
+export interface FontFaceSources {
+  readonly regular: string;
+  readonly bold?: string;
 }
 
 const FONT_FAMILIES = {
@@ -15,7 +20,7 @@ const FONT_FAMILIES = {
   Parastoo: "'Parastoo', 'Arial', 'Segoe UI', sans-serif",
 } as const;
 
-async function getFontSettings(): Promise<FontSettings> {
+export async function getFontSettings(): Promise<FontSettings> {
   return new Promise((resolve) => {
     if (typeof chrome === 'undefined' || !chrome.storage?.local) {
       resolve({
@@ -36,8 +41,11 @@ async function getFontSettings(): Promise<FontSettings> {
   });
 }
 
-function injectFontStylesheet(settings: FontSettings): void {
-  const fontUrls = {
+// The woff2 URLs live here only; sites that register the selected font under
+// their own family names (see sites/grok.ts) reuse this instead of duplicating
+// the table.
+export function getFontFaceSources(fontFamily: FontSettings['fontFamily']): FontFaceSources {
+  const fontUrls: Record<FontSettings['fontFamily'], FontFaceSources> = {
     Vazirmatn: {
       regular: chrome.runtime.getURL('fonts/Vazirmatn-Regular.woff2'),
       bold: chrome.runtime.getURL('fonts/Vazirmatn-Bold.woff2'),
@@ -51,11 +59,13 @@ function injectFontStylesheet(settings: FontSettings): void {
     },
   };
 
-  const selectedFont = fontUrls[settings.fontFamily];
+  return fontUrls[fontFamily];
+}
 
-  let fontFaceRules = '';
+export function buildFontFaceRules(settings: FontSettings): string {
+  const selectedFont = getFontFaceSources(settings.fontFamily);
 
-  fontFaceRules += `
+  let fontFaceRules = `
     @font-face {
       font-family: '${settings.fontFamily}';
       src: url('${selectedFont.regular}') format('woff2');
@@ -65,7 +75,7 @@ function injectFontStylesheet(settings: FontSettings): void {
     }
   `;
 
-  if ('bold' in selectedFont) {
+  if (selectedFont.bold !== undefined) {
     fontFaceRules += `
       @font-face {
         font-family: '${settings.fontFamily}';
@@ -77,12 +87,16 @@ function injectFontStylesheet(settings: FontSettings): void {
     `;
   }
 
+  return fontFaceRules;
+}
+
+function injectFontStylesheet(settings: FontSettings, scopeSelector?: string): void {
   const style = document.createElement('style');
 
   style.textContent = `
-    ${fontFaceRules}
+    ${buildFontFaceRules(settings)}
 
-    .rtl, [dir="rtl"], .vazir, .user-message-bubble-color {
+    ${buildFontTargetSelector(scopeSelector)} {
       font-family: ${FONT_FAMILIES[settings.fontFamily]} !important;
     }
 
@@ -91,8 +105,35 @@ function injectFontStylesheet(settings: FontSettings): void {
   document.head.appendChild(style);
 }
 
-export async function initFontInjection(): Promise<void> {
+const FONT_TARGETS = '.rtl, [dir="rtl"], .vazir, .user-message-bubble-color';
+
+// With a scope, only matching elements inside (or equal to) the scope roots get
+// the font, e.g. just the AI chat on a site that also hosts other content.
+function buildFontTargetSelector(scopeSelector?: string): string {
+  if (!scopeSelector) {
+    return FONT_TARGETS;
+  }
+  return `:is(${scopeSelector}) :is(${FONT_TARGETS}), :is(${scopeSelector}):is(${FONT_TARGETS})`;
+}
+
+export async function initFontInjection(scopeSelector?: string): Promise<void> {
   void chrome.runtime.sendMessage(INJECT_FONT_MESSAGE);
   const settings = await getFontSettings();
-  injectFontStylesheet(settings);
+  injectFontStylesheet(settings, scopeSelector);
+}
+
+/**
+ * Injects only the @font-face declarations — no forced `[dir="rtl"]` rule — and
+ * returns the settings. Used by sites that add the selected font as a face under
+ * the page's own family names instead (see sites/grok.ts).
+ */
+export async function initFontFaces(): Promise<FontSettings> {
+  void chrome.runtime.sendMessage(INJECT_FONT_MESSAGE);
+  const settings = await getFontSettings();
+
+  const style = document.createElement('style');
+  style.textContent = buildFontFaceRules(settings);
+  document.head.appendChild(style);
+
+  return settings;
 }
