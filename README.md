@@ -90,8 +90,8 @@ Source is written in TypeScript under `src/`. The build emits one self-contained
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v5.2.0 | Oct 2026 | Add Notion AI chat and Grok support |
 | v5.1.5 | Sep 2026 | Redesign landing page with live demo, browser-aware install buttons |
-| v5.2 | Oct 2026 | Add Notion AI chat and Grok support |
 | v5.1 | Jul 2026 | Add Kimi support, redesign extension popup, rename NotebookLM to Gemini Notebook |
 | v5.0 | Jun 2026 | Add per-site toggle, add z.ai, add Gemini Notebook, add Duck.ai |
 | v4.2 | Jun 2026 | Add Qwen support |

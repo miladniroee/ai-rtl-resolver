@@ -34,7 +34,18 @@ const LIST_SELECTOR = `${ROW} :is(ul, ol):not(li *)`;
 // label would otherwise make every to-do item look LTR-first.
 const HIDDEN_TEXT_SELECTOR = '[id^="agent-service-markdown-todo-"], [style*="clip: rect"]';
 
-function getVisibleText(element: Element): string {
+interface VisibleTextEntry {
+  readonly raw: string;
+  readonly visible: string;
+}
+
+// Streaming replies edit text nodes in place, which re-runs this on every pass.
+// The walker is only needed when an element's text actually changed; comparing
+// textContent first keeps every other row on a cheap native read. Weakly keyed,
+// so entries die with unmounted rows.
+const visibleTextCache = new WeakMap<Element, VisibleTextEntry>();
+
+function collectVisibleText(element: Element): string {
   const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
   let text = '';
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -43,6 +54,18 @@ function getVisibleText(element: Element): string {
     }
   }
   return text;
+}
+
+function getVisibleText(element: Element): string {
+  const raw = element.textContent ?? '';
+  const cached = visibleTextCache.get(element);
+  if (cached !== undefined && cached.raw === raw) {
+    return cached.visible;
+  }
+
+  const visible = collectVisibleText(element);
+  visibleTextCache.set(element, { raw, visible });
+  return visible;
 }
 
 // The composer is a contenteditable div, not a textarea.
