@@ -5,7 +5,7 @@
 
 # Ai RTL Resolver
 
-A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude, Deepseek, Gemeni, Qwen, z.ai, Gemini Notebook, Duck.ai, Kimi, Notion AI, and Grok.
+A browser extension that fixes text direction for Persian, Arabic, and other RTL languages on ChatGPT, Claude, Deepseek, Gemeni, Qwen, z.ai, Gemini Notebook, Duck.ai, Kimi, Notion AI, Grok, Lumo, and LongCat.
 
 ![Extension Screenshot](screenshots/promo-marquee.png)
 
@@ -25,6 +25,8 @@ A browser extension that fixes text direction for Persian, Arabic, and other RTL
 | <img src="public/platforms/kimi.png" width="20"> Kimi | [kimi.com](kimi.com) |
 | <img src="public/platforms/notion.png" width="20"> Notion AI | [app.notion.com/chat](https://app.notion.com/chat) |
 | <img src="public/platforms/grok.png" width="20"> Grok | [grok.com](https://grok.com) |
+| <img src="public/platforms/lumo.png" width="20"> Lumo | [lumo.proton.me](https://lumo.proton.me) |
+| <img src="public/platforms/longcat.png" width="20"> LongCat | [longcat.chat](https://longcat.chat) |
 
 ## Table of Contents
 - [Features](#features)
@@ -90,6 +92,7 @@ Source is written in TypeScript under `src/`. The build emits one self-contained
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v5.3.0 | Oct 2026 | Add Lumo and LongCat support |
 | v5.2.0 | Oct 2026 | Add Notion AI chat and Grok support |
 | v5.1.5 | Sep 2026 | Redesign landing page with live demo, browser-aware install buttons |
 | v5.1 | Jul 2026 | Add Kimi support, redesign extension popup, rename NotebookLM to Gemini Notebook |
