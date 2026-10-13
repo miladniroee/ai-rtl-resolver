@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Ai RTL Resolver",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Sets correct direction for persian/arabic language on ai chatbots",
   "author": "Milad Niroee",
   "homepage_url": "https://miladniroee.github.io/ai-rtl-resolver",
@@ -44,7 +44,9 @@
         "https://app.notion.com/*",
         "https://www.notion.so/*",
         "https://notion.so/*",
-        "https://grok.com/*"
+        "https://grok.com/*",
+        "https://lumo.proton.me/*",
+        "https://longcat.chat/*"
       ]
     }
   ],
@@ -113,6 +115,16 @@
     {
       "matches": ["https://grok.com/*"],
       "js": ["grok.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://lumo.proton.me/*"],
+      "js": ["lumo.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://longcat.chat/*"],
+      "js": ["longcat.js"],
       "run_at": "document_end"
     }
   ]

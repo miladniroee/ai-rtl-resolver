@@ -11,6 +11,8 @@ const SITES = [
   { name: 'Kimi', url: 'kimi.com', id: 'kimi', icon: 'platforms/kimi.png' },
   { name: 'Notion AI', url: 'app.notion.com', id: 'notion', icon: 'platforms/notion.png' },
   { name: 'Grok', url: 'grok.com', id: 'grok', icon: 'platforms/grok.png' },
+  { name: 'Lumo', url: 'lumo.proton.me', id: 'lumo', icon: 'platforms/lumo.png' },
+  { name: 'LongCat', url: 'longcat.chat', id: 'longcat', icon: 'platforms/longcat.png' },
 ];
 
 const container = document.getElementById('sites');

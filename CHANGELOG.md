@@ -2,6 +2,12 @@
 
 All notable changes to AI RTL Resolver will be documented in this file.
 
+## [5.3.0] - 2026-10-13
+
+### Added
+- Lumo (lumo.proton.me) support.
+- LongCat (longcat.chat) support.
+
 ## [5.2.0] - 2026-10-05
 
 ### Added
@@ -157,3 +163,5 @@ All notable changes to AI RTL Resolver will be documented in this file.
 | Kimi | kimi.com | ✅ Supported |
 | Notion AI | app.notion.com | ✅ Supported |
 | Grok | grok.com | ✅ Supported |
+| Lumo | lumo.proton.me | ✅ Supported |
+| LongCat | longcat.chat | ✅ Supported |
