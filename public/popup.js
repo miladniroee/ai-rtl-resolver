@@ -3,6 +3,7 @@ const SITES = [
   { name: 'Claude', url: 'claude.ai', id: 'claude', icon: 'platforms/claude.png' },
   { name: 'DeepSeek', url: 'chat.deepseek.com', id: 'deepseek', icon: 'platforms/deepseek.png' },
   { name: 'Gemini', url: 'gemini.google.com', id: 'gemeni', icon: 'platforms/gemini.png' },
+  { name: 'Google AI Studio', url: 'aistudio.google.com', id: 'aistudio', icon: 'platforms/googleaistudio.png' },
   { name: 'Perplexity', url: 'perplexity.ai', id: 'perplexity', icon: 'platforms/perplexity.png' },
   { name: 'Qwen', url: 'chat.qwen.ai', id: 'qwen', icon: 'platforms/qwen.png' },
   { name: 'z.ai', url: 'chat.z.ai', id: 'zai', icon: 'platforms/zai.png' },
